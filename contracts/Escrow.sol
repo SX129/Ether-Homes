@@ -1,6 +1,7 @@
 //SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.0;
 
+// For the ERC721 token
 interface IERC721 {
     function transferFrom(
         address _from,
@@ -10,5 +11,20 @@ interface IERC721 {
 }
 
 contract Escrow {
+    address public lender;
+    address public inspector;
+    address payable public seller;
+    address public nftAddress;
 
+    constructor(
+        address _lender,
+        address _inspector,
+        address payable _seller,
+        address _nftAddress
+    ) {
+        lender = _lender;
+        inspector = _inspector;
+        seller = _seller;
+        nftAddress = _nftAddress;
+    }
 }
