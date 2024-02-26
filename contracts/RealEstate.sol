@@ -5,7 +5,8 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 
-// Inherit from ERC721URIStorage allows for quick NFT creation
+// Inherit from ERC721URIStorage allows for NFT creation
+// Property NFTs are created and stored in this contract
 contract RealEstate is ERC721URIStorage {
     // Creates enumerable ERC721 tokens
     using Counters for Counters.Counter;
