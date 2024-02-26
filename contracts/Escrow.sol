@@ -34,12 +34,21 @@ contract Escrow {
         nftAddress = _nftAddress;
     }
     
-    function list(uint256 _nftID) public{
+    function list(uint256 _nftID, uint256 _purchasePrice, address _buyer, uint256 _escrowAmount) public{
 
         // Tranfer property NFT from seller wallet into escrow
         IERC721(nftAddress).transferFrom(msg.sender, address(this), _nftID);
 
         // Mark property NFT as listed
         isListed[_nftID] = true;
+
+        // Set the purchase price for the property NFT
+        purchasePrice[_nftID] = _purchasePrice;
+
+        // Set the buyer for the property NFT
+        buyer[_nftID] = _buyer;
+
+        // Set the escrow amount for the property NFT
+        escrowAmount[_nftID] = _escrowAmount;
     }
 }
