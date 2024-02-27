@@ -27,6 +27,11 @@ contract Escrow {
         _;
     }
 
+    modifier onlyInspector() {
+        require(msg.sender == inspector, "Only inspector can call this function");
+        _;
+    }
+
     mapping(uint256 => bool) public isListed;
     mapping(uint256 => uint256) public purchasePrice;
     mapping(uint256 => address) public buyer;
@@ -67,6 +72,11 @@ contract Escrow {
     // Put deposit into escrow
     function depositEarnest(uint256 _nftID) public payable onlyBuyer(_nftID){
         require(msg.value >= escrowAmount[_nftID], "Deposit amount must be greater than or equal to escrow amount");
+    }
+
+    // Update inspection status
+    function updateInspectionStatus(uint256 _nftID, bool _status) public onlyInspector{
+        inspectionPassed[_nftID] = _status;
     }
 
     // Receive function to allow smart contract to receive ether
