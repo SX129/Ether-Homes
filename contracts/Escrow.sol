@@ -85,14 +85,6 @@ contract Escrow {
         approval[_nftID][msg.sender] = true;
     }
 
-    // Receive function to allow smart contract to receive ether
-    receive() external payable {}
-
-    // Getter function to check escrow balance
-    function getBalance() public view returns (uint256){
-        return address(this).balance;
-    }
-
     // Finalize sale and transfer property NFT to buyer
     function finalizeSale(uint256 _nftID) public{
         require(inspectionPassed[_nftID], "Inspection must pass before finalizing sale");
@@ -121,5 +113,13 @@ contract Escrow {
         else{
             payable(seller).transfer(address(this).balance);
         }
+    }
+
+    // Receive function to allow smart contract to receive ether
+    receive() external payable {}
+
+    // Getter function to check escrow balance
+    function getBalance() public view returns (uint256){
+        return address(this).balance;
     }
 }
