@@ -92,4 +92,34 @@ contract Escrow {
     function getBalance() public view returns (uint256){
         return address(this).balance;
     }
+
+    // Finalize sale and transfer property NFT to buyer
+    function finalizeSale(uint256 _nftID) public{
+        require(inspectionPassed[_nftID], "Inspection must pass before finalizing sale");
+        require(approval[_nftID][buyer[_nftID]], "Buyer must approve the release of escrow");
+        require(approval[_nftID][seller], "Seller must approve the release of escrow");
+        require(approval[_nftID][lender], "Lender must approve the release of escrow");
+        require(address(this).balance >= purchasePrice[_nftID], "Insufficient funds in escrow");
+
+        // Mark property NFT as not listed
+        isListed[_nftID] = false;
+
+        // Transfer escrow amount to seller
+        (bool success, ) = payable(seller).call{value: address(this).balance}("");
+        require(success);
+
+        // Tranfer property NFT from escrow into buyer wallet
+        IERC721(nftAddress).transferFrom(address(this), buyer[_nftID], _nftID);
+
+    }
+
+    // Cancel sale and refund deposit to buyer
+    function cancelSale(uint256 _nftID) public{
+        if(inspectionPassed[_nftID]){
+            payable(buyer[_nftID]).transfer(address(this).balance);
+        }
+        else{
+            payable(seller).transfer(address(this).balance);
+        }
+    }
 }
