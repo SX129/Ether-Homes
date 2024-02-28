@@ -19,12 +19,6 @@ function App() {
 
   const loadBlockkchainData = async () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
-    console.log(provider);
-
-    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-
-    setAccount(accounts[0]);
-    console.log(account);
   }
 
   useEffect(() => {
@@ -33,7 +27,7 @@ function App() {
 
   return (
     <div>
-      <Navigation />
+      <Navigation account={account} setAccount={setAccount} />
       <div className='cards__section'>
 
         <h3>Welcome to Ether Homes</h3>
