@@ -39,7 +39,26 @@ function App() {
       <Search />
       <div className='cards__section'>
 
-        <h3>Welcome to Ether Homes</h3>
+        <h3>Homes for you</h3>
+        <hr />
+
+        <div className='cards'>
+          <div className='card'>
+            <div className='card__image'>
+              <img src='' alt='Home' />
+            </div>
+
+            <div className='card__info'>
+              <h4>1 ETH</h4>
+              <p>
+                <strong>1</strong> beds |
+                <strong> 2</strong> baths |
+                <strong> 3</strong> sqft.
+              </p>
+              <p>1234 Elm St.</p>
+            </div>
+          </div>
+        </div>
 
       </div>
 
