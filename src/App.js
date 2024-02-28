@@ -67,24 +67,24 @@ function App() {
       <Search />
       <div className='cards__section'>
 
-        <h3>Homes for you</h3>
+        <h3>Homes For You</h3>
         <hr />
 
         <div className='cards'>
           {homes.map((home, index) => (
             <div className='card' key={index}>
               <div className='card__image'>
-                <img src='' alt='Home' />
+                <img src={home.image} alt='Home' />
               </div>
 
               <div className='card__info'>
-                <h4>1 ETH</h4>
+                <h4>{home.attributes[0].value} ETH</h4>
                   <p>
-                    <strong>1</strong> beds |
-                    <strong> 2</strong> baths |
-                    <strong> 3</strong> sqft.
+                    <strong>{home.attributes[2].value}</strong> beds |
+                    <strong> {home.attributes[3].value}</strong> baths |
+                    <strong> {home.attributes[4].value}</strong> sqft.
                   </p>
-                <p>1234 Elm St.</p>
+                <p>{home.address}</p>
               </div>
             </div>
           ))}
