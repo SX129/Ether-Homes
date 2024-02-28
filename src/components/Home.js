@@ -27,6 +27,25 @@ const Home = ({ home, provider, escrow, togglePop }) => {
                             Buy
                         </button>
                     </div>
+                    <button className='home__contact'>
+                        Contact Agent
+                    </button>
+
+                    <hr />
+                    <h2>Overview</h2>
+                    <p>{home.description}</p>
+
+                    <hr />
+                    <h2>Facts and Features</h2>
+
+                    <ul>
+                        {home.attributes.map((attribute, index) => (
+                            <li key={index}>
+                                <strong>{attribute.trait_type}</strong> : {attribute.value}
+                            </li>
+                        ))}
+                    </ul>
+
                 </div>
 
                 <button onClick={togglePop} className='home__close'>
