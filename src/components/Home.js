@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 import close from '../assets/close.svg';
 
-const Home = ({ home, provider, escrow, togglePop }) => {
+const Home = ({ home, provider, account, escrow, togglePop }) => {
 
     const [buyer, setBuyer] = useState(null);
     const [lender, setLender] = useState(null);
@@ -80,14 +80,34 @@ const Home = ({ home, provider, escrow, togglePop }) => {
                     <p>{home.address}</p>
                     <h2>{home.attributes[0].value} ETH</h2>
 
-                    <div>
-                        <button className='home__buy'>
-                            Buy
-                        </button>
-                    </div>
-                    <button className='home__contact'>
-                        Contact Agent
-                    </button>
+                    {owner ? (
+                        <div className='home__owned'>
+                            Owned by {owner.slice(0, 6) + '...' + owner.slice(38, 42)}
+                        </div>
+                    ) : (
+                        <div>
+                            {(account === inspector) ? (
+                                <button className='home__buy'>
+                                    Approve Inspection
+                                </button>
+                            ) : (account === lender) ? (
+                                <button className='home__buy'>
+                                    Approve & Lend
+                                </button>
+                            ) : (account === seller) ? (
+                                <button className='home__buy'>
+                                    Approve & Sell
+                                </button>
+                            ) : (
+                                <button className='home__buy'>
+                                    Buy
+                                </button>
+                            )}
+                            <button className='home__contact'>
+                                Contact Agent
+                            </button>
+                        </div>
+                    )}
 
                     <hr />
                     <h2>Overview</h2>
