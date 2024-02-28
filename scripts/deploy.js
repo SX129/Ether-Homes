@@ -27,6 +27,8 @@ async function main() {
     await transaction.wait();
   }
 
+  console.log(`Minted 3 properties on IPFS`);
+
   // Deploy Escrow contract
   const Escrow = await ethers.getContractFactory('Escrow');
   escrow = await Escrow.deploy(
@@ -36,6 +38,8 @@ async function main() {
       realEstate.address,
   );
   await escrow.deployed();
+
+  console.log(`Escrow deployed to: ${escrow.address}`);
 
   // Loop to Approve properties
   for (let i = 0; i < 3; i++) {
@@ -53,7 +57,7 @@ async function main() {
   transaction = await escrow.connect(seller).list(3, tokens(15), buyer.address, tokens(5));
   await transaction.wait();
 
-  console.log(`Completed deployment of RealEstate and Escrow contracts`);
+  console.log(`Completed listing properties`);
 
 }
 
