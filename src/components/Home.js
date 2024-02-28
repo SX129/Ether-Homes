@@ -83,6 +83,17 @@ const Home = ({ home, provider, account, escrow, togglePop }) => {
     }
 
     const lendHandler = async () => {
+        const signer = await provider.getSigner();
+
+        // Lender approves sale
+        const transaction = await escrow.connect(signer).approveSale(home.id);
+        await transaction.wait();
+
+        // Lender sends loan amount to escrow
+        const lendAmount = (await escrow.purchasePrice(home.id)) - await escrow.escrowAmount(home.id);
+        await signer.sendTransaction({to: escrow.address, value: lendAmount.toString(), gasLimit: 60000});
+
+        setHasLended(true);
     }
 
     const sellHandler = async () => {
