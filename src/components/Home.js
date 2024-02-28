@@ -97,6 +97,17 @@ const Home = ({ home, provider, account, escrow, togglePop }) => {
     }
 
     const sellHandler = async () => {
+        const signer = await provider.getSigner();
+
+        // Seller approves sale
+        let transaction = await escrow.connect(signer).approveSale(home.id);
+        await transaction.wait();
+
+        // Seller finalizes sale
+        transaction = await escrow.connect(signer).finalizeSale(home.id);
+        await transaction.wait();
+
+        setHasSold(true);
     }
 
     useEffect(() => {
