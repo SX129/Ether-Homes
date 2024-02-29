@@ -13,8 +13,8 @@ Ether Homes is a full-stack real estate marketplace built on top of the Ethereum
 ## Features
 
 - Full Escrow Process (Appraisal, Lending, Inspection)
-- Create and Mint new property NFTs
-- Test Suites
+- Create and Mint New Property NFTs
+- Test Suites for Smart Contracts
 - Deployable Smart Contracts onto the Blockchain
 - Client Integration with MetaMask
 - Authorization of different Users for the Escrow process
